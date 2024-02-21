@@ -5,7 +5,7 @@
  
 <mapper namespace="com.marondal.spring.ex.mybatis.repository.ReviewRepository">
 	
-	<select id="selectReview" 
+	<select id="selectReview" parameterType="int"
 	resultType="com.marondal.spring.ex.mybatis.domain.Review">
 		SELECT 
 			`id`
