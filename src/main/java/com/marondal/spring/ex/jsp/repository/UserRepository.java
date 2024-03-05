@@ -1,5 +1,7 @@
 package com.marondal.spring.ex.jsp.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,6 +19,8 @@ public interface UserRepository {
 	public int insertUserByObject(User user);
 	
 	public User selectLastUser();
+	
+	public List<User> selectUserList();
 	
 	
 }
