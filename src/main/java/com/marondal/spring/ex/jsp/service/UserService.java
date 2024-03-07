@@ -45,5 +45,21 @@ public class UserService {
 		return userList;
 		
 	}
+	
+	// email 중복여부를 알려주는 기능
+	public boolean isDuplicateEmail(String email) {
+		
+		int count = userRepository.selectCountByEmail(email);
+		
+		// count가 1이상이면 중복
+		if(count >= 1) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	
 
 }

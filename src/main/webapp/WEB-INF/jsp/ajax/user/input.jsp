@@ -11,7 +11,7 @@
 	
 	<label>이름 : </label> <input type="text" id="nameInput"> <br>
 	<label>생년월일 : </label> <input type="text" id="birthdayInput"> <br>
-	<label>이메일 : </label><input type="text" id="emailInput"><br>
+	<label>이메일 : </label><input type="text" id="emailInput"> <button type="button" id="duplicateBtn">중복확인</button> <br>
 	<label>자기소개</label> <br>
 	<textarea cols="30" rows="7" id="introduceInput"></textarea> <br>
 	<button type="button" id="addBtn">추가</button>
@@ -20,6 +20,43 @@
 	
 	<script>
 		$(document).ready(function() {
+			
+			$("#duplicateBtn").on("click", function() {
+				
+				let email = $("#emailInput").val();
+				
+				if(email == "") {
+					alert("이메일을 입력해주세요!");
+					return ;
+				}
+				
+				$.ajax({
+					type:"get"
+					, url:"/ajax/user/duplicate-email"
+					, data:{"email":email}
+					, success:function(data) {
+						// 중복됨 :  {"isDuplicate":true}
+						// 중복안됨 :{"isDuplicate":false}
+						
+						if(data.isDuplicate) {
+							// 중복
+							alert("이메일이 중복되었습니다!");
+						} else {
+							//중복 아님
+							alert("사용가능한 이메일 입니다");
+							
+						}
+						
+					}
+					, error:function() {
+						alert("중복 확인 에러");
+					}
+				});
+				
+			});
+			
+			
+			
 			// 추가 버튼을 클릭하면
 			
 			$("#addBtn").on("click", function() {
